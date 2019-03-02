@@ -1,0 +1,14 @@
+在XDA上看到的ADB Shell调节AOD的显示时间,无需ROOT
+调节环境下亮度显示
+adb shell settings put global always_on_display_constants "screen_brightness_array=-1:2:25:100:250"
+第一个-1是代表开启,0代表关闭
+其后第一个数字是“夜晚级别”条件（非常非常低的环境光），第二个是“低亮度”条件，第三个是“高亮度“光照条件，最后一个是”太阳级别“（非常非常高的环境光）。各参数是可以改的
+默认数据的ADB shell如下
+adb shell settings put global always_on_display_constants "screen_brightness_array=-1:2:5:27:28"
+另外
+dimming_scrim_array ：整数数组，用于将环境亮度类型映射到调光稀松布。 这基本上用掩模“掩盖”AOD以进一步调暗它。(我也没看懂,这是谷歌翻译的)
+prox_screen_off_delay ：遮住距离传感器后关闭屏幕的AOD延迟时间（以毫秒为单位）。
+prox_cooldown_trigger ：触发PROX冷却计时器的阈值时间（以毫秒为单位），触发后将关闭距离传感器一段时间。
+prox_cooldown_period ：如果触发prox_cooldown_trigger则关闭距离传感器的时间（以毫秒为单位）。
+例如盖住感光器,5秒后关闭AOD,则ADB shell命令如下
+adb shell settings put global always_on_display_constants "prox_screen_off_delay=5000" 
